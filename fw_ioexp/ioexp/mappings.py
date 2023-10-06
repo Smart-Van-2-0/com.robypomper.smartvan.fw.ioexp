@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from fw_sensehat.commons import *
+from fw_ioexp.commons import *
 from ._definitions import *
 from ._dbus_descs import *
 from ._parsers import *

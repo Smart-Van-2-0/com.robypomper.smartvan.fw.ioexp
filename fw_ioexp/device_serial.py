@@ -3,8 +3,8 @@
 import os
 import serial
 
-from fw_sensehat.device import DeviceAbs
-from fw_sensehat.commons import dev_type_to_code
+from fw_ioexp.device import DeviceAbs
+from fw_ioexp.commons import dev_type_to_code
 
 
 class DeviceSerial(DeviceAbs):

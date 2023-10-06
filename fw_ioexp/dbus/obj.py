@@ -3,7 +3,7 @@
 import logging
 from pydbus.generic import signal
 
-from fw_sensehat.sense.mappings import *
+from fw_ioexp.ioexp.mappings import *
 
 
 logger = logging.getLogger()

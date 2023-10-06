@@ -4,12 +4,12 @@
 1. Connect and create dir into remote machine
   ```shell
   $ ssh pi@raspberrypi.local
-  (rpi)$ mkdir -p dev/fw_sensehat
+  (rpi)$ mkdir -p dev/fw_ioexp
   (rpi)$ exit
   ```
 2. Copy local sources to remote machine
   ```shell
-  $ rsync -av --exclude venv --exclude logs --exclude __pycache__ --exclude .git -e ssh * pi@raspberrypi.local:/home/pi/dev/fw_sensehat
+  $ rsync -av --exclude venv --exclude logs --exclude __pycache__ --exclude .git -e ssh * pi@raspberrypi.local:/home/pi/dev/fw_ioexp
   ```
 
 
@@ -24,7 +24,7 @@
   ```
 3. Install python's requirements (only once)
   ```shell
-  (rpi)$ cd dev/fw_sensehat
+  (rpi)$ cd dev/fw_ioexp
   (rpi)$ python -m venv venv           # Optional: only for venv support
   (rpi)$ source venv/bin/activate      # Optional: only for venv support
   (rpi-venv)$ pip install -R requirements.txt
@@ -35,7 +35,7 @@
 1. Connect to remote machine and cd to firmware dir
   ```shell
   $ ssh pi@raspberrypi.local
-  (rpi)$ cd dev/fw_sensehat
+  (rpi)$ cd dev/fw_ioexp
   ```
 2. Init DBus session (only if required)
   ```shell

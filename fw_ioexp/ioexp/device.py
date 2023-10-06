@@ -4,13 +4,13 @@ import logging
 
 from RPi import GPIO
 
-from fw_sensehat.sense.mappings import *
-from fw_sensehat.device import DeviceAbs
-from fw_sensehat.sense.chip.IMU import IMU
-from fw_sensehat.sense.chip.LPS22HB import LPS22HB
-from fw_sensehat.sense.chip.ADS1015 import ADS1015
-# from fw_sensehat.sense.chip.SHTC3 import SHTC3
-from fw_sensehat.sense.chip.TCS34087 import TCS34087
+from fw_ioexp.ioexp.mappings import *
+from fw_ioexp.device import DeviceAbs
+from fw_ioexp.ioexp.chip.IMU import IMU
+from fw_ioexp.ioexp.chip.LPS22HB import LPS22HB
+from fw_ioexp.ioexp.chip.ADS1015 import ADS1015
+# from fw_ioexp.ioexp.chip.SHTC3 import SHTC3
+from fw_ioexp.ioexp.chip.TCS34087 import TCS34087
 
 
 logger = logging.getLogger()
@@ -160,14 +160,14 @@ class Device(DeviceAbs):
             return
 
         import math
-        # from fw_sensehat.sense.chip.IMU import MotionVal
+        # from fw_ioexp.ioexp.chip.IMU import MotionVal
         # MotionVal = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
         MotionVal = self._imu_motion_val
-        from fw_sensehat.sense.chip.IMU import Gyro, Accel, Mag
+        from fw_ioexp.ioexp.chip.IMU import Gyro, Accel, Mag
         #Gyro = [0, 0, 0]
         #Accel = [0, 0, 0]
         #Mag = [0, 0, 0]
-        from fw_sensehat.sense.chip.IMU import q0, q1, q2, q3
+        from fw_ioexp.ioexp.chip.IMU import q0, q1, q2, q3
         #q0 = 1.0
         #q1=q2=q3=0.0
 
@@ -200,9 +200,9 @@ class Device(DeviceAbs):
             logger.debug("LPS22HB not available (Press. & Temp.)")
             return
 
-        from fw_sensehat.sense.chip.LPS22HB import LPS_STATUS
-        from fw_sensehat.sense.chip.LPS22HB import LPS_PRESS_OUT_XL, LPS_PRESS_OUT_L, LPS_PRESS_OUT_H
-        from fw_sensehat.sense.chip.LPS22HB import LPS_TEMP_OUT_L, LPS_TEMP_OUT_H
+        from fw_ioexp.ioexp.chip.LPS22HB import LPS_STATUS
+        from fw_ioexp.ioexp.chip.LPS22HB import LPS_PRESS_OUT_XL, LPS_PRESS_OUT_L, LPS_PRESS_OUT_H
+        from fw_ioexp.ioexp.chip.LPS22HB import LPS_TEMP_OUT_L, LPS_TEMP_OUT_H
         u8buf = [0, 0, 0]
 
         self._lps22hb.LPS22HB_START_ONESHOT()
@@ -221,7 +221,7 @@ class Device(DeviceAbs):
             logger.debug("ADS1015 not available (AnalogIn)")
             return
 
-        from fw_sensehat.sense.chip.ADS1015 import ADS_POINTER_CONFIG
+        from fw_ioexp.ioexp.chip.ADS1015 import ADS_POINTER_CONFIG
 
         state = self._ads1015._read_u16(ADS_POINTER_CONFIG) & 0x8000
         if state != 0x8000:
