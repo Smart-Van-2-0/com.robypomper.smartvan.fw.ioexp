@@ -14,21 +14,21 @@ from fw_ioexp.dbus.daemon import *
 from fw_ioexp.ioexp.mappings import PROPS_CODES, CALC_PROPS_CODES
 
 """ Name of the current script """
-FW_NAME = "FW Sense Hat"
+FW_NAME = "FW IO Exp"
 """ Description of the current script """
 FW_DESC = "Python script as {} firmware".format(FW_NAME)
 """ Group of the current script """
-FW_GROUP = "com.robypomper.smartvan.fw.sensehat"
+FW_GROUP = "com.robypomper.smartvan.fw.ioexp"
 """ Version of the current script """
-FW_VERSION = "1.0.0"
+FW_VERSION = "1.0.0-DEV"
 """ Value to use as default DBus name """
-DEF_DBUS_NAME = "com.sensehat"
+DEF_DBUS_NAME = "com.ioexp"
 """ Value to use as default DBus object path, if none  """
 DEF_DBUS_OBJ_PATH = None
 """ Value to use as default DBus object interface """
 DEF_DBUS_IFACE = None
 """ Maximum time a property can be stored on the cache before sending his value again. """
-CACHE_TIME_TO_RESET = timedelta(hours=0, minutes=10, seconds=0)
+CACHE_TIME_TO_RESET = timedelta(hours=0, minutes=0, seconds=1)
 """ Directory name where store log files """
 LOGGER_FOLDER = "logs"
 """ Log level for file messages """

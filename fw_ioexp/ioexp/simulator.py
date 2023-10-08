@@ -1,83 +1,99 @@
 #!/usr/bin/python3
+import logging
 
-from .device import Device
-from .mappings import *
-from ..commons import regenerateValue
+from fw_ioexp.ioexp.device import Device
+from fw_ioexp.ioexp.mappings import *
+
+
+logger = logging.getLogger()
 
 
 class DeviceSimulator(Device):
 
-    def __init__(self, auto_refresh = False):
+    def __init__(self, auto_refresh=False):
         super().__init__(auto_refresh)
+        self._out_pin_state = ['0', '0', '0', '0', '0', '0', '0', '0']
         self._data = {
-            'hardcoded_model': 'SenseHat(c)',
-            'imu_roll': '0.06830104668952965',
-            'imu_pitch': '-25.727970848515366',
-            'imu_yaw': '160.75668277388567',
-            'imu_acceleration_x': '-1043',
-            'imu_acceleration_y': '-1043',
-            'imu_acceleration_z': '-1043',
-            'imu_gyroscope_x': '1',
-            'imu_gyroscope_y': '0',
-            'imu_gyroscope_z': '6',
-            'imu_magnetic_x': '-267.0',
-            'imu_magnetic_y': '57.0',
-            'imu_magnetic_z': '-317.0',
-            'imu_qmi_temperature': '23.8203125',
-            'lps22hb_pressure': '996.468505859375',
-            'lps22hb_temperature': '26.15',
-            'ads1015_a0': '963',
-            'ads1015_a1': '979',
-            'ads1015_a2': '995',
-            'ads1015_a3': '1011',
-            'tcs34087_rgb_r': '23',
-            'tcs34087_rgb_g': '19',
-            'tcs34087_rgb_b': '18',
-            'tcs34087_c': '1926',
-            'tcs34087_rgb565': '4226',
-            'tcs34087_rgb888': '1512210',
-            'tcs34087_lux': '1.8633919013504612',
-            'tcs34087_lux_interrupt': '0',
-            'tcs34087_color_temp': '3083.0112429731416'
+            'hardcoded_model': "IOExpansionBoard",
+
+            'io_out_0': self._out_pin_state[0],
+            'io_out_1': self._out_pin_state[1],
+            'io_out_2': self._out_pin_state[2],
+            'io_out_3': self._out_pin_state[3],
+            'io_out_4': self._out_pin_state[4],
+            'io_out_5': self._out_pin_state[5],
+            'io_out_6': self._out_pin_state[6],
+            'io_out_7': self._out_pin_state[7],
+
+            'io_in_0': '0',
+            'io_in_1': '0',
+            'io_in_2': '0',
+            'io_in_3': '0',
+            'io_in_4': '0',
+            'io_in_5': '0',
+            'io_in_6': '0',
+            'io_in_7': '0'
         }
+
+    def init_chips(self):
+        pass
 
     def refresh(self, reset_data=False) -> bool:
         self._data = {
-            'Vin': 'GOOD' if random.randint(0, 1) else "NG",
-            'BATCAP': max(min(regenerateValue(self._data['BATCAP'], 1), 100), 0),
-            'Vout': max(min(regenerateValue(self._data['Vout'], 10), 5400), 5100),
+            'hardcoded_model': "IOExpansionBoard",
 
-            'hardcoded_model': 'SenseHat(c)',
-            'imu_roll': regenerateValueMaxMin(self._data['imu_roll'], 0.1, -180, 180),
-            'imu_pitch': regenerateValueMaxMin(self._data['imu_pitch'], 0.1, -180, 180),
-            'imu_yaw': regenerateValueMaxMin(self._data['imu_yaw'], 0.1, -180, 180),
-            'imu_acceleration_x': regenerateValueMaxMin(self._data['imu_acceleration_x'], 0.1, 0, 10),
-            'imu_acceleration_y': regenerateValueMaxMin(self._data['imu_acceleration_y'], 0.1, 0, 10),
-            'imu_acceleration_z': regenerateValueMaxMin(self._data['imu_acceleration_z'], 0.1, 0, 10),
-            'imu_gyroscope_x': regenerateValueMaxMin(self._data['imu_gyroscope_x'], 0.1, 0, 10),
-            'imu_gyroscope_y': regenerateValueMaxMin(self._data['imu_gyroscope_y'], 0.1, 0, 10),
-            'imu_gyroscope_z': regenerateValueMaxMin(self._data['imu_gyroscope_z'], 0.1, 0, 10),
-            'imu_magnetic_x': regenerateValueMaxMin(self._data['imu_magnetic_x'], 0.1, 0, 10),
-            'imu_magnetic_y': regenerateValueMaxMin(self._data['imu_magnetic_y'], 0.1, 0, 10),
-            'imu_magnetic_z': regenerateValueMaxMin(self._data['imu_magnetic_z'], 0.1, 0, 10),
-            'imu_qmi_temperature': regenerateValueMaxMin(self._data['imu_qmi_temperature'], 0.2, -30, 100),
-            'lps22hb_pressure': regenerateValueMaxMin(self._data['lps22hb_pressure'], 0.1, 260, 1260),
-            'lps22hb_temperature': regenerateValueMaxMin(self._data['lps22hb_temperature'], 0.2, -30, 100),
-            'ads1015_a0': regenerateValueMaxMin(self._data['ads1015_a0'], 0.1, 600, 15000),
-            'ads1015_a1': regenerateValueMaxMin(self._data['ads1015_a1'], 0.1, 900, 1000),
-            'ads1015_a2': regenerateValueMaxMin(self._data['ads1015_a2'], 0.1, 900, 1000),
-            'ads1015_a3': regenerateValueMaxMin(self._data['ads1015_a3'], 0.1, 900, 1000),
-            'tcs34087_rgb_r': regenerateValueMaxMin(self._data['tcs34087_rgb_r'], 0.1, 0, 255),
-            'tcs34087_rgb_g': regenerateValueMaxMin(self._data['tcs34087_rgb_g'], 0.1, 0, 255),
-            'tcs34087_rgb_b': regenerateValueMaxMin(self._data['tcs34087_rgb_b'], 0.1, 0, 255),
-            'tcs34087_c': regenerateValueMaxMin(self._data['tcs34087_c'], 0.1, 0, 65535),
-            'tcs34087_rgb565': regenerateValueMaxMin(self._data['tcs34087_rgb565'], 0.1, 0, 65535),
-            'tcs34087_rgb888': regenerateValueMaxMin(self._data['tcs34087_rgb888'], 0.1, 0, 16777215),
-            'tcs34087_lux': regenerateValueMaxMin(self._data['tcs34087_lux'], 0.1, 0, 100),
-            'tcs34087_lux_interrupt': '0',
-            'tcs34087_color_temp': regenerateValueMaxMin(self._data['tcs34087_color_temp'], 0.1, 0, 3394.3757313660644),
+            'io_out_0': self._out_pin_state[0],
+            'io_out_1': self._out_pin_state[1],
+            'io_out_2': self._out_pin_state[2],
+            'io_out_3': self._out_pin_state[3],
+            'io_out_4': self._out_pin_state[4],
+            'io_out_5': self._out_pin_state[5],
+            'io_out_6': self._out_pin_state[6],
+            'io_out_7': self._out_pin_state[7],
+
+            'io_in_0': '1' if random.randint(0, 100) <= 50 else '0',
+            'io_in_1': '1' if random.randint(0, 100) <= 20 else '0',
+            'io_in_2': '1' if random.randint(0, 100) <= 20 else '0',
+            'io_in_3': '1' if random.randint(0, 100) <= 20 else '0',
+            'io_in_4': '1' if random.randint(0, 100) <= 20 else '0',
+            'io_in_5': '1' if random.randint(0, 100) <= 20 else '0',
+            'io_in_6': '1' if random.randint(0, 100) <= 20 else '0',
+            'io_in_7': '1' if random.randint(0, 100) <= 20 else '0',
         }
+
         return True
+
+    def set_out_0(self, value: bool):
+        logger.info("EXECUTED out_0 with {} val".format(value))
+        self._out_pin_state[0] = "1" if value else "0"
+
+    def set_out_1(self, value: bool):
+        logger.info("EXECUTED out_1 with {} val".format(value))
+        self._out_pin_state[1] = "1" if value else "0"
+
+    def set_out_2(self, value: bool):
+        logger.info("EXECUTED out_2 with {} val".format(value))
+        self._out_pin_state[2] = "1" if value else "0"
+
+    def set_out_3(self, value: bool):
+        logger.info("EXECUTED out_3 with {} val".format(value))
+        self._out_pin_state[3] = "1" if value else "0"
+
+    def set_out_4(self, value: bool):
+        logger.info("EXECUTED out_4 with {} val".format(value))
+        self._out_pin_state[4] = "1" if value else "0"
+
+    def set_out_5(self, value: bool):
+        logger.info("EXECUTED out_5 with {} val".format(value))
+        self._out_pin_state[5] = "1" if value else "0"
+
+    def set_out_6(self, value: bool):
+        logger.info("EXECUTED out_6 with {} val".format(value))
+        self._out_pin_state[6] = "1" if value else "0"
+
+    def set_out_7(self, value: bool):
+        logger.info("EXECUTED out_7 with {} val".format(value))
+        self._out_pin_state[7] = "1" if value else "0"
 
 
 if __name__ == '__main__':
