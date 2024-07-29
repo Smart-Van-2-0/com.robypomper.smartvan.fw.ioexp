@@ -28,7 +28,7 @@ DEF_DBUS_OBJ_PATH = None
 """ Value to use as default DBus object interface """
 DEF_DBUS_IFACE = None
 """ Maximum time a property can be stored on the cache before sending his value again. """
-CACHE_TIME_TO_RESET = timedelta(hours=0, minutes=0, seconds=1)
+CACHE_TIME_TO_RESET = timedelta(hours=0, minutes=10, seconds=0)
 """ Directory name where store log files """
 LOGGER_FOLDER = "logs"
 """ Log level for file messages """
@@ -209,6 +209,7 @@ def _main_loop(dev, dbus_obj):
     logger.info("Start {} Main Loop. Press (Ctrl+C) to quit.".format(FW_NAME))
     must_shutdown = False
     while not must_shutdown:
+        logger.info("  ==== ==== ==== ====")
         logger.debug("Start fetch/pull device")
 
         try:
@@ -232,8 +233,12 @@ def _main_loop(dev, dbus_obj):
 
         logger.debug("End fetch/pull device")
 
+        sleepTime = LOOP_SLEEP if dev.is_connected else CONN_RETRY
         try:
-            time.sleep(LOOP_SLEEP if dev.is_connected else CONN_RETRY)
+            for i in range(sleepTime):
+                if must_shutdown:
+                    break
+                time.sleep(1)
 
         except KeyboardInterrupt:
             logger.info("Terminating required by the user.")
@@ -268,6 +273,7 @@ def _process_property(dev, dbus_obj, property_code):
             'time': datetime.now()
         }
         dbus_obj.update_property(property_name, property_value)
+        logger.info("R ==> '{:<16}={}'".format(property_name, "% 6.2f" % property_value))
         _update_property_derivatives(dbus_obj, property_name)
 
     except ValueError:
@@ -311,6 +317,7 @@ def _update_property_derivatives(dbus_obj, property_name):
                 }
                 # Update property
                 dbus_obj.update_property(c_property_name, c_property_value)
+                logger.info("C ==> '{:<16}={}'".format(c_property_name, "% 6.2f" % c_property_value))
                 _update_property_derivatives(dbus_obj, c_property_name)
 
         except Exception as err:
