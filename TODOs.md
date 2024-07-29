@@ -1,7 +1,7 @@
-# FW Sense Hat - TODOs
+# FW IO Exp - TODOs
 
 [README](README.md) | [CHANGELOG](CHANGELOG.md) | [TODOs](TODOs.md) | [LICENCE](LICENCE.md)
 
 ## Version 1.0.0
 
-* Enable the SHTC3 chip
+* Add configs to define how many PIN must be set as INPUT and how many as OUTPUT
