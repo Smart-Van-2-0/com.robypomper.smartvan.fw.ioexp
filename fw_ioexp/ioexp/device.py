@@ -13,7 +13,7 @@ logger = logging.getLogger()
 
 class Device(DeviceAbs):
     """
-    Device class for Sense Hat devices communicating via Serial port
+    Device class for IO Expansion devices communicating via Serial port
     """
 
     PORT_OUT = 0
@@ -112,7 +112,7 @@ class Device(DeviceAbs):
     def device_pid(self) -> "str | None":
         """
         Returns the device PID, it can be used as index for the PID dict.
-        In the Sense Hat case is the hardcoded device's model.
+        In the IO Expansion case is the hardcoded device's model.
         """
 
         if self.cached_version is None:
