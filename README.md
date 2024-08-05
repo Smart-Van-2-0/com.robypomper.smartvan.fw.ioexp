@@ -6,7 +6,7 @@ This repository is part of the [Smart Van Project](https://smartvan.johnosprojec
 
 **FW Name:** FW IO Exp<br />
 **FW Group:** com.robypomper.smartvan.fw.ioexp<br />
-**FW Version:** 1.0.0
+**FW Version:** 1.0.1-DEV
 
 [README](README.md) | [CHANGELOG](CHANGELOG.md) | [TODOs](TODOs.md) | [LICENCE](LICENCE.md)
 
