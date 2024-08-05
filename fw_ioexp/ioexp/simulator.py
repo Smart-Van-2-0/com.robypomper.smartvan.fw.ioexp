@@ -35,8 +35,13 @@ class DeviceSimulator(Device):
             'io_in_7': '0'
         }
 
+    @property
+    def is_connected(self) -> bool:
+        """ Returns always True. """
+        return self._is_connected
+
     def init_chips(self):
-        pass
+        self._is_connected = True
 
     def refresh(self, reset_data=False) -> bool:
         self._data = {
