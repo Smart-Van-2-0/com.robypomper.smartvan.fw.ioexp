@@ -5,7 +5,10 @@ import logging
 
 from fw_ioexp.ioexp.mappings import *
 from fw_ioexp.device import DeviceAbs
-from fw_ioexp.ioexp.chip.AW9523B import AW9523B
+from board import I2C
+from digitalio import Direction
+from adafruit_aw9523 import AW9523
+from adafruit_aw9523 import _AW9523_DEFAULT_ADDR as AW9523_DEFAULT_ADDR
 
 
 logger = logging.getLogger()
@@ -16,18 +19,8 @@ class Device(DeviceAbs):
     Device class for IO Expansion devices communicating via Serial port
     """
 
-    PORT_OUT = 0
-    MODE_OUT = 0
-    PORT_IN = 1
-    MODE_IN = 1
-    PIN_0 = 0b00000001
-    PIN_1 = 0b00000010
-    PIN_2 = 0b00000100
-    PIN_3 = 0b00001000
-    PIN_4 = 0b00010000
-    PIN_5 = 0b00100000
-    PIN_6 = 0b01000000
-    PIN_7 = 0b10000000
+    OUTPUT_PINS_COUNT = 8
+    INPUT_PINS_COUNT = 8
 
     def __init__(self, auto_refresh=True):
         self._data = {}
@@ -40,7 +33,12 @@ class Device(DeviceAbs):
         self.cached_type = None
         self.cached_type_code = None
 
-        self._io_exp: Optional[AW9523B] = None
+        self._i2c: Optional[I2C] = None
+        self._io_exp: Optional[AW9523] = None
+        # define empty array for pins
+        self._output_pins = []
+        self._output_pins_to_set = []
+        self._input_pins = []
         self.init_chips()
 
         if auto_refresh:
@@ -48,12 +46,19 @@ class Device(DeviceAbs):
 
     def init_chips(self):
         try:
-            self._io_exp = AW9523B(debug=0)
-            self._io_exp.setPortMode(self.PORT_OUT, self.MODE_OUT)
-            self._io_exp.setPortMode(self.PORT_IN, self.MODE_IN)
+            self._i2c = I2C()
+            self._io_exp = AW9523(self._i2c, AW9523_DEFAULT_ADDR)
 
-            #self._io_exp.setPortCtrl(PORT, 0xFF)  # set all gpio Push-Pull
-            #self._io_exp.writePort(PORT, 0x0)  # set all 0ff
+            for i in range(self.OUTPUT_PINS_COUNT):
+                print("Setting pin {} to OUTPUT".format(i))
+                self._output_pins.append(self._io_exp.get_pin(i))
+                self._output_pins[i].direction = Direction.OUTPUT
+                self._output_pins_to_set.append(None)
+
+            for i in range(self.INPUT_PINS_COUNT):
+                print("Setting pin {} to INPUT".format(i))
+                self._input_pins.append(self._io_exp.get_pin(i + self.OUTPUT_PINS_COUNT))
+                self._input_pins[i].direction = Direction.INPUT
 
             self._is_connected = True
 
@@ -147,67 +152,49 @@ class Device(DeviceAbs):
 
         self._data['hardcoded_model'] = "IOExpansionBoard"
 
-        # relays state
-        out_port = self._io_exp.readPort(self.PORT_OUT)
-        self._data['io_out_0'] = 1 if out_port & self.PIN_0 > 0 else 0
-        self._data['io_out_1'] = 1 if out_port & self.PIN_1 > 0 else 0
-        self._data['io_out_2'] = 1 if out_port & self.PIN_2 > 0 else 0
-        self._data['io_out_3'] = 1 if out_port & self.PIN_3 > 0 else 0
-        self._data['io_out_4'] = 1 if out_port & self.PIN_4 > 0 else 0
-        self._data['io_out_5'] = 1 if out_port & self.PIN_5 > 0 else 0
-        self._data['io_out_6'] = 1 if out_port & self.PIN_6 > 0 else 0
-        self._data['io_out_7'] = 1 if out_port & self.PIN_7 > 0 else 0
+        for i in range(self.OUTPUT_PINS_COUNT):
+            if self._output_pins_to_set[i] is not None:
+                self._output_pins[i].value = self._output_pins_to_set[i]
+                self._output_pins_to_set[i] = None
+            self._data['io_out_' + str(i)] = self._output_pins[i].value
 
-        # buttons state
-        in_port = self._io_exp.readPort(self.PORT_IN)
-        self._data['io_in_0'] = 1 if in_port & self.PIN_0 > 0 else 0
-        self._data['io_in_1'] = 1 if in_port & self.PIN_1 > 0 else 0
-        self._data['io_in_2'] = 1 if in_port & self.PIN_2 > 0 else 0
-        self._data['io_in_3'] = 1 if in_port & self.PIN_3 > 0 else 0
-        self._data['io_in_4'] = 1 if in_port & self.PIN_4 > 0 else 0
-        self._data['io_in_5'] = 1 if in_port & self.PIN_5 > 0 else 0
-        self._data['io_in_6'] = 1 if in_port & self.PIN_6 > 0 else 0
-        self._data['io_in_7'] = 1 if in_port & self.PIN_7 > 0 else 0
+        for i in range(self.INPUT_PINS_COUNT):
+            self._data['io_in_' + str(i)] = self._input_pins[i].value
 
-    def set_out(self, value: bool, pin):
-        port_val = self._io_exp.readPort(self.PORT_OUT)
-        if value:
-            port_val |= pin     # switch on
-        else:
-            port_val &= ~pin     # switch off
-        self._io_exp.writePort(self.PORT_OUT, port_val)
+    def set_out(self, value: bool, pin: int):
+        self._output_pins_to_set[pin] = value
 
     def set_out_0(self, value: bool):
         logger.info("EXECUTED out_0 with {} val".format(value))
-        self.set_out(value, self.PIN_0)
+        self.set_out(value, 0)
 
     def set_out_1(self, value: bool):
         logger.info("EXECUTED out_1 with {} val".format(value))
-        self.set_out(value, self.PIN_1)
+        self.set_out(value, 1)
 
     def set_out_2(self, value: bool):
         logger.info("EXECUTED out_2 with {} val".format(value))
-        self.set_out(value, self.PIN_2)
+        self.set_out(value, 2)
 
     def set_out_3(self, value: bool):
         logger.info("EXECUTED out_3 with {} val".format(value))
-        self.set_out(value, self.PIN_3)
+        self.set_out(value, 3)
 
     def set_out_4(self, value: bool):
         logger.info("EXECUTED out_4 with {} val".format(value))
-        self.set_out(value, self.PIN_4)
+        self.set_out(value, 4)
 
     def set_out_5(self, value: bool):
         logger.info("EXECUTED out_5 with {} val".format(value))
-        self.set_out(value, self.PIN_5)
+        self.set_out(value, 5)
 
     def set_out_6(self, value: bool):
         logger.info("EXECUTED out_6 with {} val".format(value))
-        self.set_out(value, self.PIN_6)
+        self.set_out(value, 6)
 
     def set_out_7(self, value: bool):
         logger.info("EXECUTED out_7 with {} val".format(value))
-        self.set_out(value, self.PIN_7)
+        self.set_out(value, 7)
 
 
 if __name__ == '__main__':
