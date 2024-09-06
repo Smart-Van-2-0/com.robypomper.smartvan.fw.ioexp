@@ -115,9 +115,9 @@ Module's files can be grouped in 2 categories:
   class that represent aDBus object to publish
 * [dbus/daemon.py](fw_ioexp/dbus/daemon.py):
   methods to handle the DBus daemon
-* [commons.py](fw_ioexp/commons.py):
+* [commons.py](fw_ioexp/base/commons.py):
   commons properties parsers and simulator methods
-* [device.py](fw_ioexp/device.py):
+* [device.py](fw_ioexp/base/device.py):
   base class for devices
-* [device_serial.py](fw_ioexp/device_serial.py):
+* [device_serial.py](fw_ioexp/base/device_serial.py):
   base implementation for serial devices

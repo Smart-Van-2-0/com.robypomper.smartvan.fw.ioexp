@@ -4,7 +4,7 @@ from typing import Optional
 import logging
 
 from fw_ioexp.ioexp.mappings import *
-from fw_ioexp.device import DeviceAbs
+from fw_ioexp.base.device import DeviceAbs
 from board import I2C
 from digitalio import Direction
 from adafruit_aw9523 import AW9523
@@ -23,6 +23,8 @@ class Device(DeviceAbs):
     INPUT_PINS_COUNT = 8
 
     def __init__(self, auto_refresh=True):
+        super().__init__()
+
         self._data = {}
 
         self._is_connected = False
