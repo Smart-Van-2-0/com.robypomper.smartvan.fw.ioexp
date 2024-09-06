@@ -5,7 +5,12 @@ import logging
 
 from fw_ioexp.ioexp.mappings import *
 from fw_ioexp.base.device import DeviceAbs
-from board import I2C
+try:
+    from board import I2C
+    _i2c_loaded = True
+except:
+    print("WARN: board.I2C module disabled.")
+    _i2c_loaded = False
 from digitalio import Direction
 from adafruit_aw9523 import AW9523
 from adafruit_aw9523 import _AW9523_DEFAULT_ADDR as AW9523_DEFAULT_ADDR
