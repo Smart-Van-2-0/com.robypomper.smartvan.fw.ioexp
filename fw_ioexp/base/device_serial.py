@@ -3,8 +3,8 @@
 import os
 import serial
 
-from fw_ioexp.device import DeviceAbs
-from fw_ioexp.commons import dev_type_to_code
+from fw_ioexp.base.device import DeviceAbs
+from fw_ioexp.base.commons import dev_type_to_code
 
 
 class DeviceSerial(DeviceAbs):
