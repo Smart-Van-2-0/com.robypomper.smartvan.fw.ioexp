@@ -3,8 +3,6 @@
 import logging
 from pydbus.generic import signal
 
-from fw_ioexp.ioexp.mappings import *
-
 logger = logging.getLogger()
 
 
