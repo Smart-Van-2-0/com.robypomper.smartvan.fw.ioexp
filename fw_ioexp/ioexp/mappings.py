@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from fw_ioexp.commons import *
+from fw_ioexp.base.commons import *
 from fw_ioexp.ioexp._definitions import *
 from fw_ioexp.ioexp._dbus_descs import *
 from fw_ioexp.ioexp._parsers import *

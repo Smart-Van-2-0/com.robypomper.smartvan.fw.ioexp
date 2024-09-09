@@ -1,5 +1,6 @@
 pycairo==1.24.0
 pydbus==0.6.0
 PyGObject==3.44.1
-smbus==1.1.post2
-RPi.GPIO==0.7.1
+adafruit-circuit
+
+python-aw9523==1.1.9

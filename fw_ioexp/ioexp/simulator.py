@@ -1,8 +1,9 @@
 #!/usr/bin/python3
+
+import random
 import logging
 
 from fw_ioexp.ioexp.device import Device
-from fw_ioexp.ioexp.mappings import *
 
 
 logger = logging.getLogger()
@@ -10,8 +11,8 @@ logger = logging.getLogger()
 
 class DeviceSimulator(Device):
 
-    def __init__(self, auto_refresh=False):
-        super().__init__(auto_refresh)
+    def __init__(self):
+        super().__init__(False)
         self._out_pin_state = ['0', '0', '0', '0', '0', '0', '0', '0']
         self._data = {
             'hardcoded_model': "IOExpansionBoard",
@@ -35,8 +36,13 @@ class DeviceSimulator(Device):
             'io_in_7': '0'
         }
 
+    @property
+    def is_connected(self) -> bool:
+        """ Returns always True. """
+        return self._is_connected
+
     def init_chips(self):
-        pass
+        self._is_connected = True
 
     def refresh(self, reset_data=False) -> bool:
         self._data = {

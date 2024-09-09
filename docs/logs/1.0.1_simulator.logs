@@ -1,0 +1,34 @@
+(venv) robypomper@roby-hp:~/Workspaces/SmartVan/Sources/com.robypomper.smartvan.fw.ioexp$ python3 run.py --simulate
+WARN: RPi.GPIO module disabled.
+(2024-08-05 09:23:30,795) [INFO   ] com.robypomper.smartvan.fw.ioexp:FW IO Exp (Version: 1.0.1-DEV)
+(2024-08-05 09:23:30,796) [INFO   ] DBus Internal Loop starting...
+(2024-08-05 09:23:30,796) [INFO   ] DBus Internal Loop started.
+(2024-08-05 09:23:30,796) [INFO   ] Publish DBus 'com.ioexp' interface on 'com.ioexp' DBus and '/io_expansion_board' object path.
+(2024-08-05 09:23:30,798) [INFO   ] Start FW IO Exp Main Loop. Press (Ctrl+C) to quit.
+
+
+(2024-08-05 09:23:30,798) [INFO   ] R ==> model            = 'IOExpansionBoard'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_0            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_1            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_2            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_3            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_4            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_5            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_6            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> out_7            = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> in_0             = 'True'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> in_1             = 'False'
+(2024-08-05 09:23:30,799) [INFO   ] R ==> in_2             = 'False'
+(2024-08-05 09:23:30,800) [INFO   ] R ==> in_3             = 'True'
+(2024-08-05 09:23:30,800) [INFO   ] R ==> in_4             = 'False'
+(2024-08-05 09:23:30,800) [INFO   ] R ==> in_5             = 'True'
+(2024-08-05 09:23:30,800) [INFO   ] R ==> in_6             = 'False'
+(2024-08-05 09:23:30,800) [INFO   ] R ==> in_7             = 'False'
+
+
+(2024-08-05 09:23:35,805) [INFO   ] R ==> in_0             = 'False'
+(2024-08-05 09:23:35,806) [INFO   ] R ==> in_5             = 'False'
+
+
+
+------ NO LOOP LOGS ------

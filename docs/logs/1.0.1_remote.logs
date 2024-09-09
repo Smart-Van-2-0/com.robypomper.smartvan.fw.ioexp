@@ -1,0 +1,32 @@
+
+pi@raspberrypi:~/dev/fw_io $ python run.py
+(2024-08-05 08:21:19,979) [INFO   ] com.robypomper.smartvan.fw.ioexp:FW IO Exp (Version: 1.0.0)
+find AW9523B, ID = 0x23
+(2024-08-05 08:21:19,981) [INFO   ] Connected to Device 'IOExpansionBoard'.
+(2024-08-05 08:21:19,986) [INFO   ] DBus Internal Loop starting...
+(2024-08-05 08:21:19,987) [INFO   ] DBus Internal Loop started.
+(2024-08-05 08:21:19,987) [INFO   ] Publish DBus 'com.ioexp' interface on 'com.ioexp' DBus and '/io_expansion_board' object path.
+(2024-08-05 08:21:19,997) [INFO   ] Start FW IO Exp Main Loop. Press (Ctrl+C) to quit.
+
+
+(2024-08-05 08:21:19,999) [INFO   ] R ==> model            = 'IOExpansionBoard'
+(2024-08-05 08:21:20,000) [INFO   ] R ==> out_0            = 'False'
+(2024-08-05 08:21:20,002) [INFO   ] R ==> out_1            = 'False'
+(2024-08-05 08:21:20,005) [INFO   ] R ==> out_2            = 'False'
+(2024-08-05 08:21:20,006) [INFO   ] R ==> out_3            = 'False'
+(2024-08-05 08:21:20,009) [INFO   ] R ==> out_4            = 'False'
+(2024-08-05 08:21:20,011) [INFO   ] R ==> out_5            = 'False'
+(2024-08-05 08:21:20,012) [INFO   ] R ==> out_6            = 'False'
+(2024-08-05 08:21:20,015) [INFO   ] R ==> out_7            = 'False'
+(2024-08-05 08:21:20,016) [INFO   ] R ==> in_0             = 'False'
+(2024-08-05 08:21:20,019) [INFO   ] R ==> in_1             = 'False'
+(2024-08-05 08:21:20,020) [INFO   ] R ==> in_2             = 'False'
+(2024-08-05 08:21:20,022) [INFO   ] R ==> in_3             = 'False'
+(2024-08-05 08:21:20,025) [INFO   ] R ==> in_4             = 'False'
+(2024-08-05 08:21:20,026) [INFO   ] R ==> in_5             = 'False'
+(2024-08-05 08:21:20,028) [INFO   ] R ==> in_6             = 'False'
+(2024-08-05 08:21:20,032) [INFO   ] R ==> in_7             = 'False'
+
+
+
+------ NO LOOP LOGS ------

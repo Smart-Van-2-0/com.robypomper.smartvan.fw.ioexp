@@ -1,12 +1,12 @@
 # FW IO Expansion
 
 Simple Python module that read/write GPIO status from [IO Expansion](https://www.waveshare.com/aw9523b-io-expansion-board.htm)
-board and share them on the local DBus.<br />
+board (based on AW9523 chip) and share them on the local DBus.<br />
 This repository is part of the [Smart Van Project](https://smartvan.johnosproject.org/).
 
 **FW Name:** FW IO Exp<br />
 **FW Group:** com.robypomper.smartvan.fw.ioexp<br />
-**FW Version:** 1.0.0
+**FW Version:** 1.0.1
 
 [README](README.md) | [CHANGELOG](CHANGELOG.md) | [TODOs](TODOs.md) | [LICENCE](LICENCE.md)
 
@@ -14,7 +14,7 @@ Once ran, this script **reads data from the IO Exp via I2C then notify
 the DBus with updated values**. On the other side, when it executes a
 DBus method, it sends the new value to the IO Exp. Then the value is
 updated back, next time the values are read. The DBus service and his
-properties are defined into [_dbus_descs.py](fw_ioexp/ioexp/_dbus_descs.py) file. More info on
+properties are defined into [_dbus_descs.py](fw_ioexp/ioexp/_dbus_descs.py) file. More info 
 on [Supported devices](/docs/supported_devices.md)
 and [value mapping](/docs/values_mapping.md).
 
@@ -115,9 +115,9 @@ Module's files can be grouped in 2 categories:
   class that represent aDBus object to publish
 * [dbus/daemon.py](fw_ioexp/dbus/daemon.py):
   methods to handle the DBus daemon
-* [commons.py](fw_ioexp/commons.py):
+* [base/commons.py](fw_ioexp/base/commons.py):
   commons properties parsers and simulator methods
-* [device.py](fw_ioexp/device.py):
+* [base/device.py](fw_ioexp/base/device.py):
   base class for devices
-* [device_serial.py](fw_ioexp/device_serial.py):
+* [base/device_serial.py](fw_ioexp/base/device_serial.py):
   base implementation for serial devices

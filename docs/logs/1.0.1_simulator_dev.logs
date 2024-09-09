@@ -1,0 +1,63 @@
+
+(venv) robypomper@roby-hp:~/Workspaces/SmartVan/Sources/com.robypomper.smartvan.fw.ioexp$ python3 run.py --simulate --dev
+WARN: RPi.GPIO module disabled.
+[INFO   ] (2024-08-05 09:31:05,065) run.py::133 com.robypomper.smartvan.fw.ioexp:FW IO Exp (Version: 1.0.1-DEV)
+[DEBUG  ] (2024-08-05 09:31:05,065) run.py::134 Execution mode: DEV
+[DEBUG  ] (2024-08-05 09:31:05,065) run.py::137 Execution args: ['--simulate', '--dev']
+[DEBUG  ] (2024-08-05 09:31:05,065) run.py::148 Simulate device
+[DEBUG  ] (2024-08-05 09:31:05,066) daemon.py::27 Initialize DBus session...
+[DEBUG  ] (2024-08-05 09:31:05,067) daemon.py::31 DBus session initialized successfully
+[INFO   ] (2024-08-05 09:31:05,067) daemon.py::40 DBus Internal Loop starting...
+[INFO   ] (2024-08-05 09:31:05,067) daemon.py::61 DBus Internal Loop started.
+[INFO   ] (2024-08-05 09:31:05,067) obj.py::33 Publish DBus 'com.ioexp' interface on 'com.ioexp' DBus and '/io_expansion_board' object path.
+[INFO   ] (2024-08-05 09:31:05,069) run.py::215 Start FW IO Exp Main Loop. Press (Ctrl+C) to quit.
+
+
+[DEBUG  ] (2024-08-05 09:31:05,069) run.py::220 Start fetch/pull device
+[DEBUG  ] (2024-08-05 09:31:05,069) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.model = IOExpansionBoard'.
+[INFO   ] (2024-08-05 09:31:05,069) run.py::284 R ==> model            = 'IOExpansionBoard'
+[DEBUG  ] (2024-08-05 09:31:05,070) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_0 = False'.
+[INFO   ] (2024-08-05 09:31:05,070) run.py::284 R ==> out_0            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,070) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_1 = False'.
+[INFO   ] (2024-08-05 09:31:05,070) run.py::284 R ==> out_1            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,070) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_2 = False'.
+[INFO   ] (2024-08-05 09:31:05,070) run.py::284 R ==> out_2            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,070) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_3 = False'.
+[INFO   ] (2024-08-05 09:31:05,070) run.py::284 R ==> out_3            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,071) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_4 = False'.
+[INFO   ] (2024-08-05 09:31:05,071) run.py::284 R ==> out_4            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,071) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_5 = False'.
+[INFO   ] (2024-08-05 09:31:05,071) run.py::284 R ==> out_5            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,071) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_6 = False'.
+[INFO   ] (2024-08-05 09:31:05,071) run.py::284 R ==> out_6            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,071) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.out_7 = False'.
+[INFO   ] (2024-08-05 09:31:05,071) run.py::284 R ==> out_7            = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,071) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_0 = False'.
+[INFO   ] (2024-08-05 09:31:05,072) run.py::284 R ==> in_0             = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,072) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_1 = False'.
+[INFO   ] (2024-08-05 09:31:05,072) run.py::284 R ==> in_1             = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,072) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_2 = False'.
+[INFO   ] (2024-08-05 09:31:05,072) run.py::284 R ==> in_2             = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,072) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_3 = False'.
+[INFO   ] (2024-08-05 09:31:05,072) run.py::284 R ==> in_3             = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,073) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_4 = False'.
+[INFO   ] (2024-08-05 09:31:05,073) run.py::284 R ==> in_4             = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,073) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_5 = False'.
+[INFO   ] (2024-08-05 09:31:05,073) run.py::284 R ==> in_5             = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,073) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_6 = False'.
+[INFO   ] (2024-08-05 09:31:05,073) run.py::284 R ==> in_6             = 'False'
+[DEBUG  ] (2024-08-05 09:31:05,073) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_7 = True'.
+[INFO   ] (2024-08-05 09:31:05,074) run.py::284 R ==> in_7             = 'True'
+[DEBUG  ] (2024-08-05 09:31:05,074) run.py::242 End fetch/pull device
+
+
+[DEBUG  ] (2024-08-05 09:31:10,079) run.py::220 Start fetch/pull device
+[DEBUG  ] (2024-08-05 09:31:10,079) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_5 = True'.
+[INFO   ] (2024-08-05 09:31:10,079) run.py::284 R ==> in_5             = 'True'
+[DEBUG  ] (2024-08-05 09:31:10,079) obj.py::46 Object '/io_expansion_board' property update 'com.ioexp.in_6 = True'.
+[INFO   ] (2024-08-05 09:31:10,079) run.py::284 R ==> in_6             = 'True'
+[DEBUG  ] (2024-08-05 09:31:10,079) run.py::242 End fetch/pull device
+
+
+
+------ NO LOOP LOGS ------
