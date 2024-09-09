@@ -4,4 +4,4 @@
 
 ## Version 1.0.0
 
-* Add configs to define how many PIN must be set as INPUT and how many as OUTPUT
+* Add configs to define which PIN must be set as INPUT and which as OUTPUT
